@@ -1,0 +1,31 @@
+// https://www.staging-typescript.org/tsconfig
+{
+  "compilerOptions": {
+      "outDir": "dist",
+      "sourceMap": true,
+      "noImplicitAny": true,
+      "module": "esnext",
+      "target": "ESNext",
+      "jsx": "react",
+      "importsNotUsedAsValues": "preserve",
+      "isolatedModules": true,
+      "strict": true,
+
+      // Linter Checks
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "noImplicitReturns": true,
+      "noFallthroughCasesInSwitch": true,
+
+      // Module Resolution
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "resolveJsonModule": true,
+      "baseUrl": "./",
+      "paths": {
+      },
+
+      // Advanced
+      "forceConsistentCasingInFileNames": true
+  }
+}
