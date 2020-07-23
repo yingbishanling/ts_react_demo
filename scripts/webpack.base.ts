@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import webpack, { Configuration } from 'webpack';
+import { Configuration } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import forkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
@@ -8,21 +8,14 @@ export const baseConfig: Configuration = {
   context: resolve(__dirname, '../'),
   entry: [
     './src/index.tsx',
-    'webpack-hot-middleware/client',
   ],
-  output: {
-    publicPath: '/',
-    path: resolve(__dirname, '../dist'),
-    filename: '[name]-[hash].bundle.js',
-  },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.json'],
+    extensions: ['.js', '.tsx', '.ts', '.json'],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: resolve(__dirname, '../src/index.html'),
     }),
-    new webpack.HotModuleReplacementPlugin(),
     new forkTsCheckerWebpackPlugin({
       typescript: {
         configFile: resolve(__dirname, '../src/tsconfig.json')
@@ -40,6 +33,39 @@ export const baseConfig: Configuration = {
             cacheDirectory: true
           },
         }
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            }
+          }
+        ],
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              lessOptions: {
+                strictMath: true,
+              },
+            },
+          },
+        ],
       },
     ],
   },
